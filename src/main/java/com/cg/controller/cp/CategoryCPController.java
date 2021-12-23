@@ -66,8 +66,8 @@ public class CategoryCPController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView showCpCategoryEdit(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("/cp/category/edit");
         Optional<Category> category = categoryService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("/cp/category/edit");
         modelAndView.addObject("category", category.get());
         return modelAndView;
     }
@@ -79,13 +79,29 @@ public class CategoryCPController {
         ModelAndView modelAndView = new ModelAndView("cp/category/edit");
 
         if(bindingResult.hasFieldErrors()) {
-            modelAndView.setViewName("cp/category/edit");
             modelAndView.addObject("script", true);
 
         } else {
             categoryService.save(category);
-            modelAndView.setViewName("cp/category/edit");
+            modelAndView.addObject("category", category);
         }
+        return modelAndView;
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView showCpCategoryDelete(@PathVariable Long id) {
+        Optional<Category> category = categoryService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("/cp/category/edit");
+        modelAndView.addObject("category", category);
+        return modelAndView;
+    }
+
+    @PostMapping("/delete/{id}")
+    public ModelAndView deleteCpCategory(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("/cp/category/delete");
+        Optional<Category> category = categoryService.findById(id);
+        category.get().setDeleted(true);
+        categoryService.save(category.get());
         return modelAndView;
     }
 }

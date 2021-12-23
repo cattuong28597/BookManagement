@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Danh sách danh mục sản phẩm</title>
+    <title>Chỉnh sửa danh mục sản phẩm</title>
     <th:block th:replace="/cp/layout/head"/>
-    
 </head>
 
 <body>
@@ -39,40 +38,30 @@
                                     <li class="breadcrumb-item active">Dashboard</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">List Category</h4>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div>
+                                        <a href="/cp/categories">
+                                            <button type="button" class="btn btn-success waves-effect waves-light">Back to list</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="page-title">Category Delete</h4>
+
                         </div>
                     </div>
                 </div>
                 <!-- end page title -->
 
-
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody th:each="category:${categories}">
-                    <tr>
-                        <th th:text="${category.id}"></th>
-                        <td th:text="${category.name}"></td>
-                        <td>
-                            <a th:href="@{/cp/categories/edit/__${category.getId()}__}">
-                                <i class="far fa-edit"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a th:href="@{/cp/categories/delete/__${category.getId()}__}">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
+                <form th:object="${category}" method="post">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" th:field="*{name}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
 
                 <div class="row">
                 </div>
@@ -103,7 +92,6 @@
 <div class="rightbar-overlay"></div>
 
 <th:block th:replace="/cp/layout/script"/>
-
 
 </body>
 </html>
