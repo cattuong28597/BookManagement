@@ -2,6 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Danh sách sản phẩm</title>
+    <link href="/cp/assets/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
+    <link href="/cp/assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css">
+    <link href="/cp/assets/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css">
+    <link href="/cp/assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css">
     <th:block th:replace="/cp/layout/head"/>
 </head>
 
@@ -38,55 +42,57 @@
                                     <li class="breadcrumb-item active">Dashboard</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">List Product</h4>
+                            <h4 class="page-title">Products List</h4>
                         </div>
                     </div>
                 </div>
                 <!-- end page title -->
 
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box">
+                            <a href="/cp/category-groups/create">
+                                <button class="btn btn-success waves-effect waves-light">
+                                    <i class="fas fa-plus-circle"></i> Add new
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Products</h4>
-                                <p class="text-muted font-13 mb-4">
-                                DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction
-                                function:
-                                <code>$().DataTable();</code>.
-                                </p>
-
-                                <table id="basic-datatable" class="table dt-responsive nowrap">
+                                <table id="scroll-horizontal-datatable" class="table w-100 nowrap">
                                     <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Category Group</th>
-                                        <th>Category</th>
-                                        <th>Sale</th>
-                                        <th>Action</th>
+                                        <th>Group Name</th>
+                                        <th>Category Name</th>
+                                        <th>Price</th>
+                                        <th class="text-center">Edit</th>
+                                        <th class="text-center">Delete</th>
                                     </tr>
                                     </thead>
-                                    <tbody >
-                                    <!--                                        <th:block th:each="category:${categories}">-->
-                                    <!--                                            <tr>-->
-                                    <!--                                                <td th:text="${category.id}"></td>-->
-                                    <!--                                                <td th:text="${category.name}"></td>-->
-                                    <!--                                                <td>-->
-                                    <!--                                                    <a th:href="@{/cp/categories/edit/__${category.id}__}">-->
-                                    <!--                                                        <i class="far fa-edit"></i>-->
-                                    <!--                                                    </a>-->
-                                    <!--                                                </td>-->
-                                    <!--                                                <td>-->
-                                    <!--                                                    <a th:href="@{/cp/categories/delete/__${category.id}__}">-->
-                                    <!--                                                        <i class="far fa-trash-alt"></i>-->
-                                    <!--                                                    </a>-->
-                                    <!--                                                </td>-->
-                                    <!--                                                <td></td>-->
-                                    <!--                                                <td></td>-->
-                                    <!--                                            </tr>-->
-                                    <!--                                        </th:block>-->
+                                    <tbody>
+                                    <th:block th:each="item : ${products}">
+                                        <tr>
+                                            <td th:text="${item.id}"></td>
+                                            <td th:text="${item.name}"></td>
+                                            <td th:text="${item.categoryGroup.name}"></td>
+                                            <td th:text="${item.categoryGroup.category.name}"></td>
+                                            <td class="text-center">
+                                                <a class="btn btn-outline-secondary" th:href="@{/cp/category-groups/edit/__${item.id}__ }">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a class="btn btn-outline-danger" th:href="@{/category-groups/delete/__${item.id}__ }">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </th:block>
                                     </tbody>
-
                                 </table>
 
                             </div> <!-- end card body-->
@@ -94,7 +100,10 @@
                     </div><!-- end col-->
                 </div>
 
+
+
                 <div class="row">
+
                 </div>
 
             </div> <!-- container -->
@@ -122,7 +131,37 @@
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
 
-<th:block th:replace="/cp/layout/script"/>
+<!--<th:block th:replace="/cp/layout/script"/>-->
+
+<!-- Vendor js -->
+<script src="/cp/assets/js/vendor.min.js"></script>
+
+<!-- third party js -->
+<script src="/cp/assets/libs/datatables/jquery.dataTables.min.js"></script>
+<script src="/cp/assets/libs/datatables/dataTables.bootstrap4.js"></script>
+<script src="/cp/assets/libs/datatables/dataTables.responsive.min.js"></script>
+<script src="/cp/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+<script src="/cp/assets/libs/datatables/dataTables.buttons.min.js"></script>
+<script src="/cp/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/cp/assets/libs/datatables/buttons.html5.min.js"></script>
+<script src="/cp/assets/libs/datatables/buttons.flash.min.js"></script>
+<script src="/cp/assets/libs/datatables/buttons.print.min.js"></script>
+<script src="/cp/assets/libs/datatables/dataTables.keyTable.min.js"></script>
+<script src="/cp/assets/libs/datatables/dataTables.select.min.js"></script>
+<script src="/cp/assets/libs/pdfmake/pdfmake.min.js"></script>
+<script src="/cp/assets/libs/pdfmake/vfs_fonts.js"></script>
+<!-- third party js ends -->
+
+<!-- Datatables init -->
+<script src="/cp/assets/js/pages/datatables.init.js"></script>
+
+<!-- App js -->
+<script src="/cp/assets/js/app.min.js"></script>
+
+<script src="/cp/assets/js/cp-app.js"></script>
+
+
+
 
 </body>
 </html>

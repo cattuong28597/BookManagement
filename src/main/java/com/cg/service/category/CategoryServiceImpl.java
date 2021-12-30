@@ -28,7 +28,17 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getById(Long id) {
-        return categoryRepository.getById(id);
+        return null;
+    }
+
+    @Override
+    public Boolean existsBySlugEquals(String slug) {
+        return categoryRepository.existsBySlugEquals(slug);
+    }
+
+    @Override
+    public Boolean existsBySlugEqualsAndIdIsNot(String slug, long id) {
+        return categoryRepository.existsBySlugEqualsAndIdIsNot(slug, id);
     }
 
     @Override
@@ -38,6 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void remove(Long id) {
-        categoryRepository.deleteById(id);
+
     }
+
 }

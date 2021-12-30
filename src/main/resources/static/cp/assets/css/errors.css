@@ -13,7 +13,7 @@
     width: 100vw;
     position: fixed;
     padding-left: 225px;
-    bottom: 50px;
+    bottom: 2px;
 }
 
 .alert-success, .alert-danger {

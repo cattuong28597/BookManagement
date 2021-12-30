@@ -1,5 +1,6 @@
-package com.cg.service.categoryGroup;
+package com.cg.service.categorygroup;
 
+import com.cg.model.Category;
 import com.cg.model.CategoryGroup;
 import com.cg.repository.CategoryGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
-public class CategoryGroupServiceImpl implements CategoryGroupService{
+public class CategoryGroupServiceImpl implements CategoryGroupService {
 
     @Autowired
     private CategoryGroupRepository categoryGroupRepository;
@@ -26,7 +28,17 @@ public class CategoryGroupServiceImpl implements CategoryGroupService{
 
     @Override
     public CategoryGroup getById(Long id) {
-        return categoryGroupRepository.getById(id);
+        return null;
+    }
+
+    @Override
+    public Boolean existsBySlugEqualsAndCategoryEquals(String slug, Category category) {
+        return categoryGroupRepository.existsBySlugEqualsAndCategoryEquals(slug, category);
+    }
+
+    @Override
+    public Boolean existsBySlugEqualsAndCategoryEqualsAndIdIsNot(String slug, Category category, Long id) {
+        return categoryGroupRepository.existsBySlugEqualsAndCategoryEqualsAndIdIsNot(slug, category, id);
     }
 
     @Override
@@ -36,6 +48,6 @@ public class CategoryGroupServiceImpl implements CategoryGroupService{
 
     @Override
     public void remove(Long id) {
-        categoryGroupRepository.deleteById(id);
+
     }
 }

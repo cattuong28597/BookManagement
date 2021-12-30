@@ -29,6 +29,7 @@ public class Product {
     @NotBlank(message = "Tên sản phẩm không được trống")
     private String name;
 
+    @Column(unique = true)
     private String slug;
 
     @Digits(integer = 12, fraction = 2)
@@ -66,7 +67,7 @@ public class Product {
     private BillDetail billDetail;
 
     @ManyToOne
-    @JoinColumn(name = "category_group_id")
+    @JoinColumn(name = "category_group_id", referencedColumnName = "id", nullable = false)
     private CategoryGroup categoryGroup;
 
     @Column(columnDefinition = "boolean default false")

@@ -1,9 +1,9 @@
-package com.cg.service.category;
+package com.cg.service.product;
 
-import com.cg.model.Category;
+import com.cg.model.Product;
 import com.cg.service.IGeneralService;
 
-public interface CategoryService extends IGeneralService<Category> {
+public interface ProductService extends IGeneralService<Product> {
 
     Boolean existsBySlugEquals(String slug);
 

@@ -9,7 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Getter
@@ -25,10 +24,11 @@ public class Category {
     private Long id;
 
     @NotBlank(message = "Tên danh mục không được trống")
-    @Pattern(regexp = "^[\\pL .,0-9()_:-]{2,50}$", message = "Tên danh mục phải chứa từ 2-50 ký tự và không có ký tự đặc biệt")
+//    @Pattern(regexp = "^[\\pL .,0-9()_:-]{2,50}$", message = "Tên danh mục phải chứa từ 2-50 ký tự và không có ký tự đặc biệt")
     @Column(unique = true)
     private String name;
 
+    @Column(unique = true)
     private String slug;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)

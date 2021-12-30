@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Create Product</title>
-    <meta charset="utf-8"/>
+    <title>Create Category Group</title>
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="/assets/image/favicon.ico">
@@ -14,10 +14,6 @@
     <link href="/cp/assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css">
     <link href="/cp/assets/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css">
     <link href="/cp/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-<!--    <link href="/cp/assets/libs/dropzone/dropzone.min.css" rel="stylesheet" type="text/css">-->
-
-    <!-- Summernote css -->
-    <link href="/cp/assets/libs/summernote/summernote-bs4.css" rel="stylesheet" type="text/css">
 
     <!-- App css -->
     <link href="/cp/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -62,7 +58,7 @@
                                     <li class="breadcrumb-item active">Dashboard</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">Add new product</h4>
+                            <h4 class="page-title">Add new category group</h4>
                         </div>
                     </div>
                 </div>
@@ -80,65 +76,22 @@
                     </div>
                     <div class="col-md-12">
                         <div class="card-box">
-                            <h4 class="header-title">Product information</h4>
+                            <h4 class="header-title">Group information</h4>
 
-                            <form th:object="${product}" method="post">
+                            <form th:object="${categoryGroup}" method="post">
                                 <div class="form-group">
-                                    <label class="col-form-label">Category group name</label>
-                                    <select th:field="*{categoryGroup}" class="form-control select2">
+                                    <label for="name" class="col-form-label">Name</label>
+                                    <input type="text" th:field="*{name}" class="form-control" placeholder="Digital Cameras...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label">Category name</label>
+                                    <select th:field="*{category}" class="selectpicker show-tick" data-style="btn-light">
                                         <th:block th:each="item : ${categories}">
-                                            <optgroup th:label="${item.name}">
-                                                <th:block th:each="itemGroup : ${item.categoryGroups}">
-                                                    <option th:value="${itemGroup.id}"
-                                                            th:text="${itemGroup.name}"></option>
-                                                </th:block>
-                                            </optgroup>
+                                            <option th:value="${item.id}" th:text="${item.name}"></option>
                                         </th:block>
                                     </select>
                                 </div>
-                                <div class="row form-group">
-                                    <div class="col-md-6">
-                                        <label class="col-form-label">Name</label>
-                                        <input type="text" th:field="*{name}" class="form-control"
-                                               placeholder="I'll Give You Truth About...">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="col-form-label">Price</label>
-                                        <input type="text" th:field="*{price}" value="0" class=" form-control">
-                                    </div>
-                                </div>
-
-                                <div class="row form-group">
-                                    <div class="col-md-6">
-                                        <label class="col-form-label">Percentage discount</label>
-                                        <input type="text" th:field="*{percentageDiscount}" value="0"
-                                               class="form-control">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="col-form-label">Discount amount</label>
-                                        <input type="text" th:field="*{discountAmount}" value="0" class=" form-control">
-                                    </div>
-                                </div>
-
-                                <div class="row form-group">
-                                    <div class="col-md-6">
-                                        <label class="col-form-label">Last price</label>
-                                        <input type="text" th:field="*{lastPrice}" value="0" class="form-control">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="col-form-label">Reward point</label>
-                                        <input type="text" th:field="*{rewardPoint}" value="0" class=" form-control">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-md-12">
-                                        <label class="col-form-label">Description</label>
-                                        <div id="summernote-editor" name="description">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary mt-4">
+                                <button type="submit" class="btn btn-primary mt-3">
                                     <i class="fas fa-plus-circle"></i> Create
                                 </button>
                             </form>
@@ -185,15 +138,8 @@
 <script src="/cp/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
 <script src="/cp/assets/libs/jquery-mask-plugin/jquery.mask.min.js"></script>
 
-<!--<script src="/cp/assets/libs/dropzone/dropzone.min.js"></script>-->
-
-<!-- Summernote js -->
-<script src="/cp/assets/libs/summernote/summernote-bs4.min.js"></script>
-
 <!-- init js -->
 <script src="/cp/assets/js/pages/form-advanced.init.js"></script>
-<script src="/cp/assets/js/pages/form-summernote.init.js"></script>
-<!--<script src="/cp/assets/js/pages/form-fileuploads.init.js"></script>-->
 
 <!-- App js -->
 <script src="/cp/assets/js/app.min.js"></script>
